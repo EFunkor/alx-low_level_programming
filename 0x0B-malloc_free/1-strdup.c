@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "main.h"
+
 /**
- * _strdup – To duplicate to a new memory space location
+ * _strdup – duplicate to new memory space location
  * @str: char
  * Return: To 0
  */
@@ -27,4 +28,3 @@ char *_strdup(char *str)
 
 	return (aaa);
 }
-
