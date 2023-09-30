@@ -9,9 +9,9 @@ int get_endianness(void)
 {
 	/* make q be unsigned int var */
 	unsigned int q = 1;
-	
+
 	/* lets asume that p is the bytes ofa multi byte type of data */
-	
+
 	char *p = (char *)&q;
 
 
