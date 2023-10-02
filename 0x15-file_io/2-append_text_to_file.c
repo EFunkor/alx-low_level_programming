@@ -11,7 +11,7 @@
  * append_text_to_file - incld text at the end of a file or to check code.
  * @filename: pointer to the name of the file.
  * @text_content: string or content required to add at the end of the file.
- * Return: 1 for a succes, then -1 for failure
+ * Return: 1 for a succes, then -1 for failure.
  */
 
 
