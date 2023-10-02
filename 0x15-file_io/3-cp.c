@@ -44,7 +44,7 @@ void checkfilefrom(int c, char **av)
 
 /**
  * check_close - to chk code.
- * @c: the close value for file
+ * @c: the close value for the file
  * @fld: file descriptor.
  */
 void check_close(int c, int fld)
