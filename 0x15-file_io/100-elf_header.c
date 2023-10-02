@@ -1,10 +1,12 @@
 #include "main.h"
+#include <stdlib.h>
 #include <elf.h>
+#include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <unistd.h>
 #include <stdio.h>
-#include <stdlib.h>
+#include <unistd.h>
+
 
 /**
  * check_elf - An fxn to check when a file is detected ELF file.
@@ -50,9 +52,10 @@ void print_magic(unsigned char *e_ident)
 			printf(" ");
 	}
 }
+
 /**
- * print_class - fxn that will print class of an ELF header
- * @e_ident: ptr to an array containing the ELF class.
+ * print_class - A function that prints the class of an ELF header
+ * @e_ident: A pointer to an array containing the ELF class.
  */
 
 void print_class(unsigned char *e_ident)
@@ -76,8 +79,8 @@ void print_class(unsigned char *e_ident)
 }
 
 /**
- * print_data - fxn that prints the data of ELF header.
- * @e_ident: ptr to one array containing the ELF class.
+ * print_class - fxn that will print class of an ELF header
+ * @e_ident: ptr to an array containing the ELF class.
  */
 
 void print_data(unsigned char *e_ident)
@@ -101,8 +104,8 @@ void print_data(unsigned char *e_ident)
 }
 
 /**
- * print_version - AN fxn to prints the version of an ELF header
- * @e_ident: PTR to an array containing the ELF version
+ * print_version - AN fxn to prints the version of an ELF header.
+ * @e_ident: PTR to array containing the ELF version.
  */
 
 void print_version(unsigned char *e_ident)
@@ -122,8 +125,8 @@ void print_version(unsigned char *e_ident)
 }
 
 /**
- * print_osabi - A function tha prints the OS/ABI of an ELF header
- * @e_ident: A ptr to an array containing the ELF version
+ * print_osabi - An fxn tha print OS/ABI ELF header.
+ * @e_ident: A ptr to an array that contain the ELF version.
  */
 
 void print_osabi(unsigned char *e_ident)
@@ -168,8 +171,8 @@ void print_osabi(unsigned char *e_ident)
 }
 
 /**
- * print_abi - fxn that prints the ABI version of an ELF header
- * @e_ident: ptr toarray with ELF ABI version.
+ * print_abi - A function that prints the ABI version of an ELF header.
+ * @e_ident: A ptr to an arr. that contain an ELF ABI version.
  */
 
 void print_abi(unsigned char *e_ident)
@@ -179,8 +182,8 @@ void print_abi(unsigned char *e_ident)
 }
 
 /**
- * print_type - fxn to prints the type of an ELF header
- * @e_type:  ELF type.
+ * print_type - A function that prints the type of an ELF header
+ * @e_type: The ELF type.
  * @e_ident: A pointer to an array containing the ELF class
  */
 
@@ -215,9 +218,10 @@ void print_type(unsigned int e_type, unsigned char *e_ident)
 
 /**
  * print_entry - A function that prints the entry point of an ELF header
- * @e_entry: The address of the ELF entry point
- * @e_ident: A pointer to an array containing the ELF class.
+ * @e_entry: add. of the ELF entry point.
+ * @e_ident: PTR to an arr. containing the ELF class.
  */
+
 void print_entry(unsigned long int e_entry, unsigned char *e_ident)
 {
 	printf(" Entry point address: ");
@@ -237,9 +241,9 @@ void print_entry(unsigned long int e_entry, unsigned char *e_ident)
 }
 
 /**
- * close_elf - A fxn to closes an ELF file.
- * @elf: The file descriptor of the ELF file
- * Description: when the file is not able to be closed - exit code 98
+ * close_elf - FXN which will close an ELF file.
+ * @elf:  file descriptor for that ELF file.
+ * Description: when file cannot be closed - then exit code 98
  */
 
 void close_elf(int elf)
@@ -253,12 +257,12 @@ void close_elf(int elf)
 }
 
 /**
- * main -  display of the info.
- * @argc: The nmbr of arguments supplied to the program.
- * @argv: array of pointers to the arguments, argv
- * Return: 0 on success
+ * main - FXN that displays the information.
+ * @argc: The nmbr of argumentsupply to the program.
+ * @argv: arr of ptrs to the arguments.
+ * Return: 0 on success, for success.
  * Description: when file is not an ELF File or
- * the function fails - exit code 98.
+ * the function fails - should exit code 98.
  */
 
 int main(int __attribute__((__unused__)) argc, char *argv[])
@@ -287,18 +291,20 @@ int main(int __attribute__((__unused__)) argc, char *argv[])
 		dprintf(STDERR_FILENO, "Error: `%s`: No such file\n", argv[1]);
 		exit(98);
 	}
+
 	check_elf(header->e_ident);
 	printf("ELF Header:\n");
 	print_magic(header->e_ident);
-	print_class(header->e_ident);
-	print_data(header->e_ident);
 	print_version(header->e_ident);
 	print_osabi(header->e_ident);
 	print_abi(header->e_ident);
 	print_type(header->e_type, header->e_ident);
 	print_entry(header->e_entry, header->e_ident);
-
-	free(header);
+	print_class(header->e_ident);
+	print_data(header->e_ident);
+	
 	close_elf(o);
+	free(header);
+	
 	return (0);
 }		
