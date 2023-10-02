@@ -40,7 +40,8 @@ ssize_t read_textfile(const char *filename, size_t letters)
 
 	if (fldesc < 0 || refil < 0 || refil < let)
 		return (0);
-	close(fldesc);
+	
 	free(buffr);
+	close(fldesc);
 	return (refil);
 }
