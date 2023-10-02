@@ -1,55 +1,57 @@
+#include <stdlib.h>
 #include "main.h"
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#define perm (S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH)
+#include <stdio.h>
 
-
-void checkfileto(int s, char **av);
-void checkfilefrom(int s, char **arvg);
-void checkclose(int s, int fd);
+void checkfilefrom(int c, char **av);
+void checkfileto(int c, char **av);
+void checkclose(int c, int fd);
 
 /**
- * checkfileto - for checking the code
- * @s: for the nmbr of args
- * @argv: repr. the args
+ * checkfileto - to chk code
+ * @c: No. of of argument sent to program
+ * @av: array of ptrs to argument.
  */
 void checkfileto(int c, char **av)
 {
-	if (s < 0)
+	if (c < 0)
 	{
-		dprintf(2, "Error: Can't write to %s\n", argv[2]);
+		dprintf(2, "Error: Can't write to %s\n", av[2]);
 		exit(99);
 	}
 }
 
 
 /**
- * checkfilefrom - for check on the code
- * @s: the NUMR of args
- * @argv: the args ptrs
+ * checkfilefrom - to chk code
+ * @c: the nmbr of argumets.
+ * @av: the array of ptrs to argumentss
  */
-void checkfilefrom(int s, char **argv)
+void checkfilefrom(int c, char **av)
 {
-	if (s < 0)
+	if (c < 0)
 	{
-		dprintf(2, "Error: Can't read from file %s\n", argv[1]);
+		dprintf(2, "Error: Can't read from file %s\n", av[1]);
 		exit(98);
 	}
 }
 
 
 /**
- * checkclose - checker forthe code
- * @s: the close value
- * @fd: the file descriptor
+ * check_close - to chk code.
+ * @c: the close value for file
+ * @fld: file descriptor.
  */
-void checkclose(int c, int fd)
+void check_close(int c, int fld)
 {
-	if (s < 0)
+	if (c < 0)
 	{
-		dprintf(2, "Error: Can't close fd %d\n", fd);
+		dprintf(2, "Error: Can't close fld %d\n", fld);
 		exit(100);
 	}
 }
@@ -57,14 +59,14 @@ void checkclose(int c, int fd)
 
 /**
  * main - check the code
- * @ac: the NBR of args
- * @argv: the args pointers to argument
- * Return: When result is Always 0.
+ * @ac: the nmbr of argumets.
+ * @av: the arrayargument
+ * Return: Always to 0.
  */
-int main(int ac, char **argv)
+int main(int ac, char **av)
 {
-	int fd;
-	int fd1;
+	int fld;
+	int fld1;
 	int fr;
 	int fw;
 	char buf[1024];
@@ -76,22 +78,22 @@ int main(int ac, char **argv)
 		dprintf(2, "Usage: cp file_from file_to\n");
 		exit(97);
 	}
-	fd1 = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, perm);
-	checkfileto(fd1, argv);
-	fd = open(argv[1], O_RDONLY);
-	checkfilefrom(fd, argv);
-	fr = read(fd, buf, 1023);
-	checkfilefrom(fr, argv);
-	fw = write(fd1, buf, fr);
-	checkfileto(fw, argv);
+	fld1 = open(av[2], O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, perm);
+	checkfileto(fld1, av);
+	fld = open(av[1], O_RDONLY);
+	checkfilefrom(fld, av);
+	fr = read(fld, buf, 1023);
+	checkfilefrom(fr, av);
+	fw = write(fld1, buf, fr);
+	checkfileto(fw, av);
 	while (fr > 0)
 	{
-		fr = read(fd, buf, 1023);
-		fw = write(fd1, buf, fr);
+		fr = read(fld, buf, 1023);
+		fw = write(fld1, buf, fr);
 	}
-	closev1 = close(fd);
-	checkclose(closev1, fd);
-	closev2 = close(fd1);
-	checkclose(closev2, fd1);
+	closev1 = close(fld);
+	check_close(closev1, fld);
+	closev2 = close(fld1);
+	check_close(closev2, fld1);
 	return (0);
 }
