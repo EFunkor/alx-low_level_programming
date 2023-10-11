@@ -2,18 +2,18 @@
 
 
 /**
- * get_endianness - FOR CheckN the sys endianness of the system.
- * Return: 0 if Large endian, or 1 if Lil endian.
+ * get_endianness - fxn fr endianness checks.
+ * Return: 0 if big end, 1 if little end.
  */
+
 int get_endianness(void)
 {
-	/* make q be unsigned int var */
-	unsigned int q = 1;
-
-	/* lets asume that p is the bytes ofa multi byte type of data */
-
-	char *p = (char *)&q;
+	/* say k is unsigned int variable */
+	unsigned int k = 1;
 
 
-	return ((int)*p);
+	/* say y as bytes of the multi byte data sample */
+	char *w = (char *)&k;
+
+	return (*w == 1);
 }
