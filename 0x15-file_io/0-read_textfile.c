@@ -1,51 +1,37 @@
 #include "main.h"
 
-/*
- * read_textfile - read, then print a text file.
- * @filename: Name of  file to be read
- * @letters: Nbr of letters to print.
- *
- * Return: The nbr of letters printed. Returns 0, failure.
+/**
+ * read_textfile - fxn which reads a text file and prints to POSIX stdout
+ * @letters: nmbr of letters it will read and print.
+ * @filename: File name to be read, or opened.
+ * Return: numby,  number of letters it  read and print or 0 on error.
  */
 
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	int file_descriptor;
-	ssize_t bytes_read, bytes_written;
-	char *buffer;
+	/* variables declaring listed */
+	char *buffer; /* buffer storing the read data */
+	ssize_t fldp; /* file descr on the opened file */
+	ssize_t numby;  /* number of bytes written to STDOUT */
+	ssize_t Z; /* number of bytes read from the file */
 
-	if (filename == NULL)
-		return (0);
+	/* to opening the file for reading */
+	fldp = open(filename, O_RDONLY);
+	if (fldp == -1)
+		return (0); /* return 0 if file fails to open */
 
-	file_descriptor = open(filename, O_RDONLY);
-	if (file_descriptor == -1)
-		return (0);
-
+	/* memory allocating for the buffer */
 	buffer = malloc(sizeof(char) * letters);
-	if (buffer == NULL)
-	{
-		close(file_descriptor);
-		return (0);
-	}
 
-	bytes_read = read(file_descriptor, buffer, letters);
-	if (bytes_read == -1)
-	{
-		free(buffer);
-		close(file_descriptor);
-		return (0);
-	}
+	/* to read data in file into the buffer */
+	Z = read(fldp, buffer, letters);
 
-	bytes_written = write(STDOUT_FILENO, buffer, bytes_read);
-	if (bytes_written == -1 || bytes_written != bytes_read)
-	{
+	/* to write read data to the STDOUT */
+	numby = write(STDOUT_FILENO, buffer, Z);
+
+	/* free allocated memmory */
 	free(buffer);
-		close(file_descriptor);
-		return (0);
-	}
+	close(fldp);
 
-	free(buffer);
-	close(file_descriptor);
-
-	return (bytes_written);
-}  
+	return (numby);
+}
