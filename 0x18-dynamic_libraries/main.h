@@ -2,6 +2,7 @@
 #define MAIN_H
 
 #include <stdlib.h>
+#include <math.h>
 /* function prototypes for dynamic libraries */
 int _putchar(char c);
 int _islower(int c);
