@@ -1,5 +1,5 @@
-#ifndef BISKIT_HASH_TABLES_H
-#define BISKIT_HASH_TABLES_H
+#ifndef MY_HASH_TABLES_H
+#define MY_HASH_TABLES_H
 
 #include <stdlib.h>
 #include <stddef.h>
@@ -15,7 +15,7 @@
  * @key: The key, string
  * The key is unique in the HashTable
  * @value: The value corresponding to a key
- * @next: A pointer to the next node of the List
+ * @next: A ptr to the next node of the List
  */
 typedef struct hash_node_s
 {
@@ -56,17 +56,17 @@ void hash_table_delete(hash_table_t *ht);
  * @key: The key, string
  * The key is unique in the HashTable
  * @value: The value corresponding to a key
- * @next: A pointer to the next node of the List
- * @sprev: A pointer to the previous element of the sorted linked list
- * @snext: A pointer to the next element of the sorted linked list
+ * @next: A ptr to the next node of the List
+ * @sprev: A ptr to the previous element of the sorted linked list
+ * @snext: A ptr to the next element of the sorted linked list
  */
 typedef struct shash_node_s
 {
-     char *key;
-     char *value;
-     struct shash_node_s *next;
-     struct shash_node_s *sprev;
-     struct shash_node_s *snext;
+	char *key;
+	char *value;
+	struct shash_node_s *next;
+	struct shash_node_s *sprev;
+	struct shash_node_s *snext;
 } shash_node_t;
 
 /**
@@ -76,15 +76,15 @@ typedef struct shash_node_s
  * @array: An array of size @size
  * Each cell of this array is a pointer to the first node of a linked list,
  * because we want our HashTable to use a Chaining collision handling
- * @shead: A pointer to the first element of the sorted linked list
- * @stail: A pointer to the last element of the sorted linked list
+ * @shead: A ptr to the first element of the sorted linked list
+ * @stail: A ptr to the last element of the sorted linked list
  */
 typedef struct shash_table_s
 {
-     unsigned long int size;
-     shash_node_t **array;
-     shash_node_t *shead;
-     shash_node_t *stail;
+	unsigned long int size;
+	shash_node_t **array;
+	shash_node_t *shead;
+	shash_node_t *stail;
 } shash_table_t;
 /* Function prototypes */
 shash_table_t *shash_table_create(unsigned long int size);
